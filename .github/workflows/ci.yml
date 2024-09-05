@@ -31,7 +31,10 @@ jobs:
      # Install Yarn (if not already installed)
     - name: Install Yarn
       run: npm install --global yarn
-    # Run your tests using Yarn
+    # Install dependencies using Yarn
+    - name: Install dependencies
+      run: yarn install
+    # Run tests using Yarn
     - name: Run tests
       run: yarn test
 
