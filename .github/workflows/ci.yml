@@ -31,7 +31,17 @@ jobs:
      # Install Yarn (if not already installed)
     - name: Install Yarn
       run: npm install --global yarn
-    # Install dependencies using Yarn
+    # Cache Yarn dependencies to speed up subsequent builds
+    - name: Cache dependencies
+      uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+    # Install Yarn dependencies
     - name: Install dependencies
       run: yarn install
     # Run tests using Yarn
