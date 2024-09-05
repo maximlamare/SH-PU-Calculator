@@ -17,42 +17,36 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    # Checkout the code from the repository
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v4
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-     # Install Yarn (if not already installed)
+
+     # Install Yarn
     - name: Install Yarn
       run: npm install --global yarn
+
     # Cache Yarn dependencies to speed up subsequent builds
     - name: Cache dependencies
       uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            ~/.cache/yarn
+      with:
+        path: |
+          node_modules
+          ~/.cache/yarn
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
     # Install Yarn dependencies
     - name: Install dependencies
       run: yarn install
+
     # Run tests using Yarn
     - name: Run tests
       run: yarn test
-
-    # Cache Yarn dependencies to improve build speed
-    - name: Cache dependencies
-      uses: actions/cache@v3
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
