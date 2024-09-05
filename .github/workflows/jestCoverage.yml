@@ -41,7 +41,5 @@ jobs:
 
       - name: Run tests
         run: |
-          yarn test --coverage --coverageReporters json-summary
-
-      - name: Jest Coverage Comment
-        uses: MishaKav/jest-coverage-comment@main
+          yarn test --coverage
+  
