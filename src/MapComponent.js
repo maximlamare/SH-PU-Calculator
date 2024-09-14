@@ -63,7 +63,7 @@ const MapComponent = ({ geoJSONData, clearGeoJSON, setArea }) => {
                 setArea(null);
             };
         }
-    }, [clearGeoJSON]);
+    }, [clearGeoJSON, setArea]);
 
 
     return (
