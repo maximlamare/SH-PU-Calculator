@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import HeaderLogo from './components/Header.js';
-import GeoJSONAreaCalculator from './GeoJSONAreaCalculator';
+import GeoJSONAreaCalculator from './GeoJSONAreaCalculator.js';
 import MapComponent from './MapComponent.js';
 import AreaBox from './AreaBox.js';
 
