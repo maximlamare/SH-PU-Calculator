@@ -1,11 +1,23 @@
 
-// Function to invert coordinate pairs
-function invertCoordinates(coords) {
-    return coords.map(polygon =>
-        polygon.map(ring =>
-            ring.map(coord => [coord[1], coord[0]])
-        )
-    );
-}
+export const isFeatureCollection = (parsedGeometry) => parsedGeometry.type === 'FeatureCollection';
+export const isFeature = (parsedGeometry) => parsedGeometry.type === 'Feature';
+export const isPolygon = (geometry) => geometry?.type === 'Polygon' ?? false;
 
-export default invertCoordinates;
+
+export const appendPolygon = (currentGeometry, newPolygon) => {
+    if (isPolygon(currentGeometry)) {
+        return {
+            type: 'MultiPolygon',
+            coordinates: [currentGeometry.coordinates, newPolygon.coordinates],
+        };
+    }
+};
+
+export const getFeatureCollectionMultiPolygon = (featureCollection) => {
+    const { features } = featureCollection;
+    let currentGeo = features[0].geometry;
+    for (let feature of features.slice(1)) {
+        currentGeo = appendPolygon(currentGeo, feature.geometry);
+    }
+    return currentGeo;
+};
