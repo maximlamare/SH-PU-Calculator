@@ -1,7 +1,7 @@
 {
   "name": "pucalc",
   "version": "0.1.0",
-  "homepage": "https://maximlamare.github.io/SH-PU-Calculator/",
+  "homepage": "https://maximlamare.github.io/SH-PU-Calculator",
   "private": true,
   "dependencies": {
     "@heroicons/react": "^2.1.5",
