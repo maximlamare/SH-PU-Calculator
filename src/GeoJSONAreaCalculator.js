@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import * as turf from '@turf/turf';
 import Tooltip from './components/Tooltip/Tooltip';
 
 
