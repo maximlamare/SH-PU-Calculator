@@ -10,7 +10,7 @@ const HeaderLogo = () => {
                 alt="logo"
             />
             <h1 className="heading-primary ml-1">
-                <i className="text-primary cursor-default">Basic PU Calculator</i>
+                <i className="text-primary cursor-default"> PU Calculator</i>
             </h1>
         </>
     );
