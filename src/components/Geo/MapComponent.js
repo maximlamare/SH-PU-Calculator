@@ -67,7 +67,7 @@ const MapComponent = ({ geoJSONData, clearGeoJSON, setArea }) => {
 
 
     return (
-        <div className="flex h-screen"
+        <div className="flex h-80vh"
         >
 
             <MapContainer

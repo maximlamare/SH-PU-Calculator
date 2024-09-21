@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import Tooltip from './components/Tooltip/Tooltip';
+import Tooltip from '../Tooltip/Tooltip';
 
 
 const GeoJSONAreaCalculator = ({ setGeoJSONData, clearGeoJSONData }) => {
@@ -50,7 +50,7 @@ const GeoJSONAreaCalculator = ({ setGeoJSONData, clearGeoJSONData }) => {
 
     return (
 
-        <div className="bg-gray-100 rounded-lg min-h overflow-y-auto">
+        <div className="bg-gray-100 rounded-lg min-h overflow-y-auto p-4">
             <h2 className="heading-secondary">
                 <div className="flex items-center">
                     <div className="mr-2">
@@ -90,14 +90,8 @@ const GeoJSONAreaCalculator = ({ setGeoJSONData, clearGeoJSONData }) => {
                 </button>
             </div>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <br />
-
-
 
         </div>
-
-
-
     );
 };
 
