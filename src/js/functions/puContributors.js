@@ -1,14 +1,12 @@
-function areaPUs(height, width, resolution) {
+function areaPUs(height, width) {
     /**
      * Computes the contribution based on a given area (in m2) and a resolution.
      *
-     * @param {number} height - Height of the AOI in m.
-     * @param {number} width - Width of the AOI in m.
-     * @param {number} resolution - Resolution of the request in m.
+     * @param {number} height - Height of the AOI in pixels
+     * @param {number} width - Width of the AOI in pixels.
      * @returns {number} Contribution factor for the AOI.
      */
-    let area = Math.floor(height) * Math.floor(width);
-    return area === 0 ? 0 : Math.max(area / Math.pow(resolution, 2) / Math.pow(512, 2), 0.01);
+    return (width === 0 || height === 0) ? 0 : Math.max((height * width / Math.pow(512, 2)).toFixed(2), 0.01);
 }
 
 function inputBandPUs(numInputBands) {
@@ -48,17 +46,29 @@ function samplesContributor(dataSamples) {
     return dataSamples;
 }
 
-function totalPuContribution(height, width, resolution, numInputBands, dtype, dataSamples) {
-    
-    console.log("height", height);
-    console.log("width", width);
-    console.log("resolution", resolution);
-    console.log("numInputBands", numInputBands);
-    console.log("dtype", dtype);
-    console.log("dataSamples", dataSamples);
+function totalPuContribution(height, width, numInputBands, dtype, dataSamples) {
+    /**
+     * Calculates the total Processing Unit (PU) contribution based on various factors.
+     *
+     * @param {number} height - Height of the Area of Interest (AOI) in pixels.
+     * @param {number} width - Width of the AOI in pixels.
+     * @param {number} numInputBands - Number of input bands in the evalscript.
+     * @param {string} dtype - Data type of the output ("32bit", "16bit", or "8bit").
+     * @param {number} dataSamples - Number of data samples or output rasters.
+     * @returns {number} The total PU contribution, with a minimum value of 0.005.
+     *
+     * @description
+     * This function calculates the total PU contribution by considering four main factors:
+     * 1. Area contribution (based on height and width)
+     * 2. Input band contribution
+     * 3. Data type contribution
+     * 4. Data samples contribution
+     * 
+     * The final result is the product of all these contributions, with a minimum value of 0.005.
+     */
 
     // Compute the total contribution of PUs
-    let areaContrib = areaPUs(height, width, resolution);
+    let areaContrib = areaPUs(height, width);
     let inputBandContrib = inputBandPUs(numInputBands);
     let dtypeContrib = dataTypeContributor(dtype);
     let samplesContrib = samplesContributor(dataSamples);
