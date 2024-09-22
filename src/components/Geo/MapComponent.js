@@ -8,11 +8,12 @@ import L from 'leaflet';
 import { computeArea } from '../../js/functions/geoCalculations';
 
 
-const MapComponent = ({ onAreaUpdate, geoJSONData }) => {
+const MapComponent = ({ onAreaUpdate, geoJSONData, clearGeoJSONRef }) => {
   const position = [47.06, 15.44]; // Graz coordinates
   const [polygons, setPolygons] = useState([]);
   const featureGroupRef = useRef();
   const mapRef = useRef();
+
   const updateTotalArea = useCallback((newPolygons) => {
     const newTotalArea = newPolygons.reduce((sum, polygon) => sum + polygon.area, 0);
     console.log('Updating total area to:', newTotalArea);
@@ -41,50 +42,38 @@ const MapComponent = ({ onAreaUpdate, geoJSONData }) => {
     });
   }, [updateTotalArea]);
 
-  const onEdited = useCallback((e) => {
-    const { layers } = e;
-    setPolygons(prevPolygons => {
-      const newPolygons = prevPolygons.map(polygon => {
-        if (layers.hasLayer(polygon.layer)) {
-          const newArea = computeArea(polygon.layer.toGeoJSON());
-          return { ...polygon, area: newArea };
-        }
-        return polygon;
-      });
-      updateTotalArea(newPolygons);
-      return newPolygons;
-    });
-  }, [updateTotalArea]);
-
   const clearAllPolygons = useCallback(() => {
     if (featureGroupRef.current) {
-      console.log('Clearing all polygons');
-      console.log(featureGroupRef.current);
       featureGroupRef.current.clearLayers();
     }
     updateTotalArea([]);
-
   }, [updateTotalArea]);
 
   useEffect(() => {
-    if (geoJSONData === null) {
-      clearAllPolygons();
-    } else {
+    clearGeoJSONRef.current = clearAllPolygons;
+  }, [clearAllPolygons, clearGeoJSONRef]);
+
+  useEffect(() => {
+    if (geoJSONData) {
       // Add to map after clearing
       const currentFeatureGroup = featureGroupRef.current;
       currentFeatureGroup.clearLayers();
       const geoJSONLayer = L.geoJSON(geoJSONData).addTo(currentFeatureGroup);
+      // Assign a unique ID to the layer
+      const layerId = L.stamp(geoJSONLayer);
       const bounds = geoJSONLayer.getBounds();
       mapRef.current.fitBounds(bounds);
 
+      // Calculate the are
+      const area = computeArea(geoJSONData);
+
       setPolygons(prevPolygons => {
-        const newPolygons = [...prevPolygons, { geoJSONLayer, area }];
+        const newPolygons = [...prevPolygons, { layer: geoJSONLayer, area, id: layerId }];
         updateTotalArea(newPolygons);
         return newPolygons;
       });
 
-      // Calculate and update the area
-      const area = computeArea(geoJSONData);
+      // Update the total area
       updateTotalArea([{ area }]);
     }
   }, [geoJSONData, updateTotalArea]);
@@ -100,7 +89,6 @@ const MapComponent = ({ onAreaUpdate, geoJSONData }) => {
           position='topright'
           onCreated={onCreated}
           onDeleted={onDeleted}
-          onEdited={onEdited}
           draw={{
             rectangle: true,
             circle: false,
@@ -109,6 +97,7 @@ const MapComponent = ({ onAreaUpdate, geoJSONData }) => {
             polyline: false,
             polygon: true,
           }}
+          edit={{ edit: false }}
         />
       </FeatureGroup>
     </MapContainer>
