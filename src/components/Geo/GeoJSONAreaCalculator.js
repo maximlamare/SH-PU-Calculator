@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import Tooltip from '../Tooltip/Tooltip';
 
 
-const GeoJSONAreaCalculator = ({ setGeoJSONData, clearGeoJSONData }) => {
+const GeoJSONAreaCalculator = ({ onGeoJSONUpload, onClearGeoJSON }) => {
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
     const fileInputRef = useRef(null);
@@ -18,7 +18,7 @@ const GeoJSONAreaCalculator = ({ setGeoJSONData, clearGeoJSONData }) => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
         }
-        clearGeoJSONData();
+        onClearGeoJSON();
     };
 
     const handleCalculateArea = () => {
@@ -31,18 +31,18 @@ const GeoJSONAreaCalculator = ({ setGeoJSONData, clearGeoJSONData }) => {
         reader.onload = (e) => {
             try {
                 const geoJSON = JSON.parse(e.target.result);
-                setGeoJSONData(geoJSON);
+                onGeoJSONUpload(geoJSON);
                 setError(null);
             } catch (error) {
                 console.error('Error reading GeoJSON file:', error);
                 setError('Error reading GeoJSON file: ' + error.message);
-                setGeoJSONData(null);
+                onGeoJSONUpload(null);
             }
         };
         reader.onerror = (e) => {
             console.error('Error reading file:', e);
             setError('Error reading file: ' + e.target.error.message);
-            setGeoJSONData(null);
+            onGeoJSONUpload(null);
         };
 
         reader.readAsText(file);
@@ -84,9 +84,9 @@ const GeoJSONAreaCalculator = ({ setGeoJSONData, clearGeoJSONData }) => {
                 </button>
                 <button
                     onClick={handleClear}
-                    className="flex justify-right items-center tertiary-button ml-2"
+                    className="bg-gray-300 hover:bg-gray-400 secondary-button"
                 >
-                    Clear
+                    Clear AOI
                 </button>
             </div>
             {error && <p style={{ color: 'red' }}>{error}</p>}

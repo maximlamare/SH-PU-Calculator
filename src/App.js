@@ -16,7 +16,6 @@ const App = () => {
 
   const handleAreaUpdate = useCallback((newArea) => {
     console.log('handleAreaUpdate called with:', newArea);
-
     setArea(newArea);
   }, []);
 
@@ -39,6 +38,10 @@ const App = () => {
     }
   };
 
+  const handleGeoJSONUpload = useCallback((data) => {
+    setGeoJSONData(data);
+  }, []);
+
   return (
     <div className="App">
       <div id="code-editor-modal"></div>
@@ -49,7 +52,7 @@ const App = () => {
       </div>
       <div className="flex mx-4 lg:mx-4">
         <div className="w-1/2 p-1">
-          <GeoJSONAreaCalculator setGeoJSONData={setGeoJSONData} clearGeoJSONData={clearGeoJSONData} />
+          <GeoJSONAreaCalculator onGeoJSONUpload={handleGeoJSONUpload} onClearGeoJSON={clearGeoJSONData} />
           <div className="my-3"></div>
           <AreaBox area={area} />
           <div className="my-3"></div>
@@ -64,6 +67,7 @@ const App = () => {
         <div className="w-1/2 p-1 h-64">
           <MapComponent
             onAreaUpdate={handleAreaUpdate}
+            geoJSONData={geoJSONData}
           />
         </div>
       </div>
