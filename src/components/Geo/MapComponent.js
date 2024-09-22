@@ -16,7 +16,6 @@ const MapComponent = ({ onAreaUpdate, geoJSONData, clearGeoJSONRef }) => {
 
   const updateTotalArea = useCallback((newPolygons) => {
     const newTotalArea = newPolygons.reduce((sum, polygon) => sum + polygon.area, 0);
-    console.log('Updating total area to:', newTotalArea);
     onAreaUpdate(newTotalArea);
   }, [onAreaUpdate]);
 
@@ -24,7 +23,6 @@ const MapComponent = ({ onAreaUpdate, geoJSONData, clearGeoJSONRef }) => {
     const { layer } = e;
     const geoJSON = layer.toGeoJSON();
     const area = computeArea(geoJSON);
-    console.log('Area of created polygon:', area);
 
     setPolygons(prevPolygons => {
       const newPolygons = [...prevPolygons, { layer, area }];

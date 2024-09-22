@@ -15,7 +15,6 @@ const App = () => {
   const clearGeoJSONRef = useRef(null);
 
   const handleAreaUpdate = useCallback((newArea) => {
-    console.log('handleAreaUpdate called with:', newArea);
     setArea(newArea);
   }, []);
 
@@ -58,7 +57,7 @@ const App = () => {
           <AreaBox area={area} />
           <div className="my-3"></div>
           <Parameters
-            area={area}
+            geoJSONData={geoJSONData}
             onComputePUs={handleComputePUs}
             onReset={handleReset}
           />

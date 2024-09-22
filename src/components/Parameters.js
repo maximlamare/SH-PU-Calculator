@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { totalPuContribution } from '../js/functions/puContributors';
+import { calculateAutoDimensions } from '../js/functions/geoCalculations';
 
-
-const Parameters = ({ area, onComputePUs, onReset }) => {
+const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
     const [resolution, setResolution] = useState(10);
     const [inputBands, setInputBands] = useState(3);
     const [dataType, setDataType] = useState('8bit');
@@ -14,18 +14,17 @@ const Parameters = ({ area, onComputePUs, onReset }) => {
     const handleOutputRastersChange = (e) => setOutputRasters(e.target.value);
 
     const handleComputePUs = () => {
-        if (!area || area <= 0) {
+        if (!geoJSONData) {
             onComputePUs(null);
             return;
         }
 
-        let height = 512;
-        let width = 512;
+        // Get height and width from geoJSONData
+        const [height, width] = calculateAutoDimensions(geoJSONData, resolution);
 
         const result = totalPuContribution(
             height,
             width,
-            resolution,
             inputBands,
             dataType,
             outputRasters
@@ -33,7 +32,7 @@ const Parameters = ({ area, onComputePUs, onReset }) => {
         onComputePUs(result);
     };
 
-        const handleReset = () => {
+    const handleReset = () => {
         setResolution(10);
         setInputBands(3);
         setDataType('8bit');
@@ -101,9 +100,9 @@ const Parameters = ({ area, onComputePUs, onReset }) => {
                 </div>
                 <div className="flex justify-center w-full gap-4">
                     <button className="secondary-button ml-aut">
-                         <button onClick={handleComputePUs}>Compute PUs</button>
+                        <button onClick={handleComputePUs}>Compute PUs</button>
                     </button>
-                    <button 
+                    <button
                         className="bg-gray-300 hover:bg-gray-400 secondary-button"
                         onClick={handleReset}
                     >
