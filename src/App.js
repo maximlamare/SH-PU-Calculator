@@ -33,6 +33,7 @@ const App = () => {
 
   const clearGeoJSONData = () => {
     setGeoJSONData(null);
+    setArea(0);
     if (clearGeoJSONRef.current) {
       clearGeoJSONRef.current();
     }
@@ -68,6 +69,7 @@ const App = () => {
           <MapComponent
             onAreaUpdate={handleAreaUpdate}
             geoJSONData={geoJSONData}
+            clearGeoJSONRef={clearGeoJSONRef}
           />
         </div>
       </div>
