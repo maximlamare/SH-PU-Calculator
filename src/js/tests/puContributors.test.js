@@ -19,7 +19,7 @@ describe('Test PU area contribution', () => {
     });
 });
 
-describe('Input output contributions', () => {
+describe('Input band contributions', () => {
     const inputBands = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30];
 
     inputBands.forEach(item =>
@@ -47,11 +47,11 @@ describe('Data type contributions', () => {
     });
 });
 
-describe('Output samples contribution', () => {
+describe('INput samples contribution', () => {
     const samples = Array.from({ length: 5 }, () => Math.floor(Math.random() * 100));
 
     samples.forEach(item =>
-        test(`Test output number of samples: ${item}`, () => {
+        test(`Test input number of samples: ${item}`, () => {
             expect(samplesContributor(item)).toBe(item);
         })
     )
