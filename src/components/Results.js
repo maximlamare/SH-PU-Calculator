@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PUBox = ({ PUs, computeClicked, reset }) => {
-    console.log("PUs", PUs);
     return (
         <div className="flex bg-gray-100 rounded-lg min-h-[100px] overflow-y-auto items-center justify-center">
             <div className="text-center">
