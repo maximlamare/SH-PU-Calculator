@@ -21,7 +21,7 @@ const GeoJSONAreaCalculator = ({ onGeoJSONUpload, onClearGeoJSON }) => {
         onClearGeoJSON();
     };
 
-    const handleCalculateArea = () => {
+    const handleUploadGeoJSON = () => {
         if (!file) {
             setError('Please select a file.');
             return;
@@ -77,10 +77,10 @@ const GeoJSONAreaCalculator = ({ onGeoJSONUpload, onClearGeoJSON }) => {
                         textOverflow: 'ellipsis',
                     }} />
                 <button
-                    onClick={handleCalculateArea}
+                    onClick={handleUploadGeoJSON}
                     className="flex justify-right items-center secondary-button ml-auto"
                 >
-                    Calculate Area
+                    Upload file
                 </button>
                 <button
                     onClick={handleClear}
