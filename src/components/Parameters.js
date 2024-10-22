@@ -35,10 +35,12 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
     };
 
     const handleComputePUs = () => {
-        if (!geoJSONData) {
+
+        if (!geoJSONData || !geoJSONData.features || geoJSONData.features.length === 0) {
             onComputePUs(null);
             return;
         }
+
 
         // Get height and width from geoJSONData
         const [height, width] = calculateAutoDimensions(geoJSONData, resolution);
