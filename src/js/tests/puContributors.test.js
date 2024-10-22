@@ -30,8 +30,9 @@ describe('Input band contributions', () => {
 });
 
 describe('Data type contributions', () => {
+
     test('Test 32bit data type', () => {
-        expect(dataTypeContributor('32bit')).toBe(2);
+        expect(dataTypeContributor("32bit")).toBe(2);
     });
 
     test('Test 16bit data type', () => {
@@ -59,27 +60,27 @@ describe('INput samples contribution', () => {
 
 describe('Total PU contribution', () => {
     test('Test with area', () => {
-        expect(totalPuContribution(1024, 1024, 1, 3, "8bit", 1)).toBe(4);
+        expect(totalPuContribution(1024, 1024, 3, "8bit", 1)).toBe(4);
     });
 
     test('Test with resolution', () => {
-        expect(totalPuContribution(512, 512, 10, 3, "8bit", 1)).toBe(0.01);
+        expect(totalPuContribution(512, 512, 3, "8bit", 1)).toBe(1);
     });
 
     test('Test with input', () => {
-        expect(totalPuContribution(512, 512, 1, 6, "8bit", 1)).toBe(2);
+        expect(totalPuContribution(512, 512, 6, "8bit", 1)).toBe(2);
     });
 
     test('Test with data type', () => {
-        expect(totalPuContribution(512, 512, 1, 3, "32bit", 1)).toBe(2);
+        expect(totalPuContribution(512, 512, 3, "32bit", 1)).toBe(2);
     });
 
     test('Test with outputs', () => {
-        expect(totalPuContribution(512, 512, 1, 3, "16bit", 12)).toBe(12);
+        expect(totalPuContribution(512, 512, 3, "16bit", 12)).toBe(12);
     });
 
     test('Test with too small', () => {
-        expect(totalPuContribution(1, 1, 1, 1, "16bit", 1)).toBe(0.005);
+        expect(totalPuContribution(1, 1, 1, "16bit", 1)).toBe(0.005);
     });
 
 });

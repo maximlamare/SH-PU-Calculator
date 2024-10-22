@@ -19,20 +19,20 @@ function inputBandPUs(numInputBands) {
     return numInputBands / 3;
 }
 
-function dataTypeContributor(dtype) {
+function dataTypeContributor(dataType) {
     /**
      * Computes the contribution based on data type.
      *
-     * @param {string} dtype - The data type.
+     * @param {string} dataType - The data type.
      * @returns {number} Contribution factor based on data type.
      * @throws {Error} If dtype is not "32bit", "16bit", or "8bit".
      */
-    if (dtype === "32bit") {
+    if (dataType === "32bit") {
         return 2;
-    } else if (dtype === "16bit" || dtype === "8bit") {
+    } else if (dataType === "16bit" || dataType === "8bit") {
         return 1;
     } else {
-        throw new Error('Invalid data type. Expected "32bit", "16bit", or "8bit".');
+        throw new Error(`Invalid data type. Expected "32bit", "16bit", or "8bit".`);
     }
 }
 
