@@ -33,6 +33,7 @@ const MapComponent = ({ onAreaUpdate, geoJSONData, clearGeoJSONRef, onGeoJSONUpd
     if (featureGroupRef.current) {
       featureGroupRef.current.clearLayers();
     }
+    setPolygons([]);
     updateTotalArea([]);
     updateGeoJSON([]);
   }, [updateTotalArea, updateGeoJSON]);
