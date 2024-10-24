@@ -35,6 +35,6 @@ jobs:
             # Step 5: Run the deploy script
             - name: Deploy to GitHub Pages
               run: |
-                gh-pages -d build --user "maximlamare <32132761+maximlamare@users.noreply.github.com>" --message "Deploying to GitHub Pages"
+                npx gh-pages -d build --user "maximlamare <32132761+maximlamare@users.noreply.github.com>" --message "Deploying to GitHub Pages"
               env:
                 GITHUB_TOKEN: ${{ secrets.TOKEN }} 
