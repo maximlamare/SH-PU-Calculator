@@ -37,4 +37,4 @@ jobs:
             - name: Deploy to GitHub Pages
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Set the GitHub token as an environment variable
-              run: npx gh-pages -d build --user "${{ github.actor }}" --message "Deploying to GitHub Pages"
+              run: npx gh-pages -d build --user "${{ github.actor }} <github-actions@github.com>" --message "Deploying to GitHub Pages"
