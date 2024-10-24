@@ -32,14 +32,10 @@ jobs:
             - name: Build project
               run: npm run build
 
-            # Step 4: configure Git user
-            - name: Configure Git
-              run: |
-                git config --global user.name "${{ github.actor }}"
-                git config --global user.email "32132761+maximlamare@users.noreply.github.com"
-
             # Step 5: Run the deploy script
             - name: Deploy to GitHub Pages
               run: |
-                git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-                npx gh-pages -d build --repo https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+                git config --global user.name "${{ github.actor }}"
+                git config --global user.email "32132761+maximlamare@users.noreply.github.com"
+                git remote set-url origin "https://x-access-token:${{GITHUB_TOKEN}}@github.com/${{ github.repository }}.git"
+                npx gh-pages -d build 
