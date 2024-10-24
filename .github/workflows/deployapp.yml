@@ -27,6 +27,12 @@ jobs:
             - name: Install dependencies
               run: npm install
 
-            # Step 4: Run the deploy script
+            # Step 4: configure Git user
+            - name: Configure Git
+              run: |
+                git config --global user.name "${{ github.actor }}"
+                git config --global user.email "github-actions@github.com"
+
+            # Step 5: Run the deploy script
             - name: Run npm deploy
               run: npm run deploy
