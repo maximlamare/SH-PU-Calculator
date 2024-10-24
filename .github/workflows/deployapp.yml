@@ -34,5 +34,6 @@ jobs:
                 git config --global user.email "github-actions@github.com"
 
             # Step 5: Run the deploy script
-            - name: Run npm deploy
-              run: npm run deploy
+            - name: Deploy to GitHub Pages
+              run: |
+                npx gh-pages -d build --user "${{ github.actor }}" --message "Deploying to GitHub Pages" --token "${{ secrets.GITHUB_TOKEN }}"
