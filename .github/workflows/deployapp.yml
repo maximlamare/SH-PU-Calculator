@@ -10,31 +10,36 @@ on:
   
   # Define the jobs that will be run
 jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v3
+    
+          - name: Set up Node.js
+            uses: actions/setup-node@v3
+            with:
+              node-version: '20.17'
+    
+          - name: Install dependencies
+            run: npm install
+    
+          - name: Building project
+            run: npm run build
+    
+          - name: Running tests
+            run: npm run test
+
     deploy:
-       permissions:
-         contents: write  # Add this to ensure write permissions
+       name: Deploy
+       needs: build
        runs-on: ubuntu-latest  # Use the latest Ubuntu environment for the action
        steps:
-            # Step 1: Checkout the repository to the runner
-            - name: Checkout code
-              uses: actions/checkout@v3  # Check out the repository content to GitHub runner
-
-            # Step 2: Set up Node.js environment
-            - name: Set up Node.js
-              uses: actions/setup-node@v3
-              with:
-                node-version: '20.17'  # Specify the Node.js version, change as needed
-
-            # Step 3: Install dependencies
-            - name: Install dependencies
-              run: npm install
-
-            - name: Build project
-              run: npm run build
 
             # Step 5: Run the deploy script
             - name: Deploy to GitHub Pages
               run: |
                 npx gh-pages -d build --user "maximlamare <32132761+maximlamare@users.noreply.github.com>" --message "Deploying to GitHub Pages"
               env:
-                GITHUB_TOKEN: ${{ secrets.TOKEN }} 
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
