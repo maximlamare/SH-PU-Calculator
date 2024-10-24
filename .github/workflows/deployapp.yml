@@ -1,0 +1,32 @@
+name: Deploy webapp
+
+# Specify when the workflow should run
+on:
+    push:
+      branches:
+        - main  # This runs the workflow when code is pushed to the "main" branch
+  
+    workflow_dispatch:  # Allows the workflow to be triggered manually
+  
+  # Define the jobs that will be run
+jobs:
+    deploy:
+       runs-on: ubuntu-latest  # Use the latest Ubuntu environment for the action
+       steps:
+            # Step 1: Checkout the repository to the runner
+            - name: Checkout code
+              uses: actions/checkout@v3  # Check out the repository content to GitHub runner
+
+            # Step 2: Set up Node.js environment
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: '20.17'  # Specify the Node.js version, change as needed
+
+            # Step 3: Install dependencies
+            - name: Install dependencies
+              run: npm install
+
+            # Step 4: Run the deploy script
+            - name: Run npm deploy
+              run: npm run deploy
