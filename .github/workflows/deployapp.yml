@@ -11,6 +11,8 @@ on:
   # Define the jobs that will be run
 jobs:
     deploy:
+       permissions:
+         contents: write  # Add this to ensure write permissions
        runs-on: ubuntu-latest  # Use the latest Ubuntu environment for the action
        steps:
             # Step 1: Checkout the repository to the runner
@@ -38,6 +40,6 @@ jobs:
 
             # Step 5: Run the deploy script
             - name: Deploy to GitHub Pages
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Set the GitHub token as an environment variable
-              run: npx gh-pages -d build --user "${{ github.actor }} <32132761+maximlamare@users.noreply.github.com>" --message "Deploying to GitHub Pages"
+              run: |
+                git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+                npx gh-pages -d build --repo https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
