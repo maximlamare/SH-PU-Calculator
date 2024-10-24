@@ -78,7 +78,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                         <select
                             value={mosaicking}
                             onChange={handleMosaickingChange}
-                            className="ml-2 p-1 border rounded"
+                            className="block mt-1 p-1 border rounded"
                         >
                             <option value="SIMPLE">SIMPLE</option>
                             <option value="ORBIT">ORBIT</option>
@@ -97,7 +97,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                                 type="number"
                                 value={inputSamples}
                                 onChange={handleInputSamplesChange}
-                                className="ml-2 p-1 border rounded"
+                                className="block mt-1 p-1 border rounded"
                             />
                         </label>
                     </div>
@@ -108,7 +108,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                         <select
                             value={resolutionClass}
                             onChange={handleResolutionClassChange}
-                            className="ml-2 p-1 border rounded"
+                            className="block mt-1 p-1 border rounded"
                         >
                             <option value="S210">Sentinel-2: 10m</option>
                             <option value="L8">Landsat: 30m</option>
@@ -126,7 +126,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                                 type="number"
                                 value={resolution}
                                 onChange={handleResolutionChange}
-                                className="ml-2 p-1 border rounded"
+                                className="block mt-1 p-1 border rounded"
                             />
                         </label>
                     </div>
@@ -141,7 +141,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                             type="number"
                             value={inputBands}
                             onChange={handleInputBandsChange}
-                            className="ml-2 p-1 border rounded"
+                            className="block mt-1 p-1 border rounded"
                         />
                     </label>
                 </div>
@@ -154,7 +154,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                         <select
                             value={dataType}
                             onChange={handleDataTypeChange}
-                            className="ml-2 p-1 border rounded"
+                            className="block mt-1 p-1 border rounded"
                         >
                             <option value="8bit">8bit</option>
                             <option value="16bit">16bit</option>
