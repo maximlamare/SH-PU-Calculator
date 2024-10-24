@@ -37,4 +37,4 @@ jobs:
               run: |
                 gh-pages -d build --user "maximlamare <32132761+maximlamare@users.noreply.github.com>" --message "Deploying to GitHub Pages"
               env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+                GITHUB_TOKEN: ${{ secrets.TOKEN }} 
