@@ -1,54 +1,36 @@
-name: Deploy webapp
+name: Deploy to GitHub Pages
 
-# Specify when the workflow should run
 on:
-    push:
-      branches:
-        - main  # This runs the workflow when code is pushed to the "main" branch
-  
-    workflow_dispatch:  # Allows the workflow to be triggered manually
-  
-  # Define the jobs that will be run
+  push:
+    branches:
+      - main  # Change this to your main branch
+
 jobs:
-    build:
-        name: Build
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v3
-    
-          - name: Set up Node.js
-            uses: actions/setup-node@v3
-            with:
-              node-version: '20.17'
-    
-          - name: Install dependencies
-            run: npm install
-    
-          - name: Building project
-            run: npm run build
-    
-          - name: Running tests
-            run: npm run test
+  deploy:
+    runs-on: ubuntu-latest
 
-          - name: Uploading production-ready build files
-            uses: actions/upload-artifact@v3
-            with:
-              name: production-files
-              path: ./build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
-    deploy:
-       name: Deploy
-       needs: build
-       runs-on: ubuntu-latest  # Use the latest Ubuntu environment for the action
-       steps:
-            - name: Downloading artifact
-              uses: actions/download-artifact@v3
-              with:
-                name: production-files
-                path: ./build
-            - name: Deploy to GitHub Pages
-              run: |
-                npx gh-pages -d build --user "maximlamare <32132761+maximlamare@users.noreply.github.com>" --message "Deploying to GitHub Pages"
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build  # Adjust this command based on your build process
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "Maxim Lamare"
+          git config --global user.email "32132761+maximlamare@users.noreply.github.com"
+          git remote set-url origin https://github.com/${{ github.repository }}.git  # Set the remote URL
+
+      - name: Deploy to GitHub Pages
+        run: npx gh-pages -d build --user "Maxim Lamare <32132761+maximlamare@users.noreply.github.com>" --message "Deploying to GitHub Pages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Set the GitHub token for authentication
