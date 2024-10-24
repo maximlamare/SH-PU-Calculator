@@ -30,6 +30,6 @@ jobs:
           git config --global user.email "32132761+maximlamare@users.noreply.github.com"
 
       - name: Deploy to GitHub Pages
-        run: npx gh-pages -d build --user "Maxim Lamare <32132761+maximlamare@users.noreply.github.com>" --message "Deploying to GitHub Pages"
+        run: npx gh-pages -d build --message "Deploying to GitHub Pages"
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}  # Set the GitHub token for authentication
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Set the GitHub token for authentication
