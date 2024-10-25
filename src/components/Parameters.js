@@ -11,7 +11,12 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
     const [inputSamples, setInputSamples] = useState(1); // Add state for the extra number input
 
 
-    const handleMosaickingChange = (e) => { setMosaicking(e.target.value); };
+    const handleMosaickingChange = (e) => {
+        setMosaicking(e.target.value);
+        if (e.target.value === 'SIMPLE') {
+            setInputSamples(1);
+        }
+    };
     const handleInputBandsChange = (e) => setInputBands(e.target.value);
     const handleDataTypeChange = (e) => setDataType(e.target.value);
     const handleInputSamplesChange = (e) => { setInputSamples(e.target.value); };
