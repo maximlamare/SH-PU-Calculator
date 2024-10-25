@@ -10,7 +10,7 @@ import { computeArea } from '../../js/functions/geoCalculations';
 
 const MapComponent = ({ onAreaUpdate, geoJSONData, clearGeoJSONRef, onGeoJSONUpdate }) => {
   const position = [47.06, 15.44]; // Graz coordinates
-  const [polygons, setPolygons] = useState([]);
+  const [polygons, setPolygons] = useState([]);  // eslint-disable-line no-unused-vars
   const featureGroupRef = useRef();
   const mapRef = useRef();
 
