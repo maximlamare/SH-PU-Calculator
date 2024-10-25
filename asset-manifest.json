@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/SH-PU-Calculator/static/css/main.3243c4ea.css",
-    "main.js": "/SH-PU-Calculator/static/js/main.188d92e1.js",
+    "main.js": "/SH-PU-Calculator/static/js/main.c6861c41.js",
     "static/media/spritesheet.svg": "/SH-PU-Calculator/static/media/spritesheet.a4e0eb7ad904a4858361.svg",
     "index.html": "/SH-PU-Calculator/index.html",
     "main.3243c4ea.css.map": "/SH-PU-Calculator/static/css/main.3243c4ea.css.map",
-    "main.188d92e1.js.map": "/SH-PU-Calculator/static/js/main.188d92e1.js.map"
+    "main.c6861c41.js.map": "/SH-PU-Calculator/static/js/main.c6861c41.js.map"
   },
   "entrypoints": [
     "static/css/main.3243c4ea.css",
-    "static/js/main.188d92e1.js"
+    "static/js/main.c6861c41.js"
   ]
 }
