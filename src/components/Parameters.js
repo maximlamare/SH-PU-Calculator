@@ -39,7 +39,6 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
         setResolutionClass(key);
         setResolution(resolutionMapping[key].value);
     };
-
     const handleResolutionChange = (e) => {
         const value = e.target.value;
         setResolution(value);
@@ -54,7 +53,6 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
             onComputePUs(null);
             return;
         }
-
         // Get height and width from geoJSONData
         const [height, width] = calculateAutoDimensions(
             geoJSONData,
