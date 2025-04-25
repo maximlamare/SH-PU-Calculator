@@ -70,12 +70,12 @@ function totalPuContribution(height, width, numInputBands, dtype, dataSamples) {
 	 */
 
 	// Compute the total contribution of PUs
-	let areaContrib = areaPUs(height, width);
-	let inputBandContrib = inputBandPUs(numInputBands);
-	let dtypeContrib = dataTypeContributor(dtype);
-	let samplesContrib = samplesContributor(dataSamples);
+	const areaContrib = areaPUs(height, width);
+	const inputBandContrib = inputBandPUs(numInputBands);
+	const dtypeContrib = dataTypeContributor(dtype);
+	const samplesContrib = samplesContributor(dataSamples);
 
-	let totalContrib =
+	const totalContrib =
 		areaContrib * inputBandContrib * dtypeContrib * samplesContrib;
 
 	return Math.max(totalContrib, 0.005);

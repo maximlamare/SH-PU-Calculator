@@ -21,8 +21,8 @@ const calculatePixelSize = (geometry, resolution) => {
 };
 
 const calculateAutoDimensions = (geoJSONData, resolution) => {
-	let bounds = getBounds(geoJSONData);
-	let pixelSize = calculatePixelSize(bounds, resolution);
+	const bounds = getBounds(geoJSONData);
+	const pixelSize = calculatePixelSize(bounds, resolution);
 	return pixelSize;
 };
 
