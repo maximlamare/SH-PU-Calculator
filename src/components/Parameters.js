@@ -1,37 +1,43 @@
-import React, { useState } from 'react';
-import { totalPuContribution } from '../js/functions/puContributors';
-import { calculateAutoDimensions } from '../js/functions/geoCalculations';
+import React, { useState } from "react";
+import { totalPuContribution } from "../js/functions/puContributors";
+import { calculateAutoDimensions } from "../js/functions/geoCalculations";
 
 const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
-    const [mosaicking, setMosaicking] = useState('SIMPLE'); // Add state for mosaicking
+    const [mosaicking, setMosaicking] = useState("SIMPLE"); // Add state for mosaicking
     const [resolution, setResolution] = useState(10);
     const [resolutionClass, setResolutionClass] = useState(1);
     const [inputBands, setInputBands] = useState(3);
-    const [dataType, setDataType] = useState('8bit');
+    const [dataType, setDataType] = useState("8bit");
     const [inputSamples, setInputSamples] = useState(1); // Add state for the extra number input
-
 
     const handleMosaickingChange = (e) => {
         setMosaicking(e.target.value);
-        if (e.target.value === 'SIMPLE') {
+        if (e.target.value === "SIMPLE") {
             setInputSamples(1);
         }
     };
     const handleInputBandsChange = (e) => setInputBands(e.target.value);
     const handleDataTypeChange = (e) => setDataType(e.target.value);
-    const handleInputSamplesChange = (e) => { setInputSamples(e.target.value); };
+    const handleInputSamplesChange = (e) => {
+        setInputSamples(e.target.value);
+    };
 
     const resolutionMapping = {
-        'S210': 10,
-        'L8': 30,
-        'PS': 3,
-        'SkySat': 0.5,
-        'OTHER': 1
+        S1HIW: { value: 10, text: "Sentinel-1 HIGH IW/SM - 10m" },
+        S1HEW: { value: 25, text: "Sentinel-1 HIGH EW - 25m" },
+        S1M: { value: 40, text: "Sentinel-1 MEDIUM - 40m" },
+        S210: { value: 10, text: "Sentinel-2: 10m" },
+        S3OLCIL1B: { value: 300, text: "Sentinel-3 OLCI L1B - 300m" },
+        S3OLCIL2: { value: 300, text: "Sentinel-3 OLCI L2 - 300m" },
+        S3SLSTRL1B: { value: 500, text: "Sentinel-3 SLSTR1B L1B - 500m" },
+        S5: { value: 7000, text: "Sentinel-5P - 7km" },
+        DEM: { value: 30, text: "Digital Elevation Model - 30m" },
+        OTHER: { value: 1, text: "Other" },
     };
     const handleResolutionClassChange = (e) => {
-        const value = e.target.value;
-        setResolutionClass(value);
-        setResolution(resolutionMapping[value]);
+        const key = e.target.value;
+        setResolutionClass(key);
+        setResolution(resolutionMapping[key].value);
     };
 
     const handleResolutionChange = (e) => {
@@ -40,32 +46,37 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
     };
 
     const handleComputePUs = () => {
-
-        if (!geoJSONData || !geoJSONData.features || geoJSONData.features.length === 0) {
+        if (
+            !geoJSONData ||
+            !geoJSONData.features ||
+            geoJSONData.features.length === 0
+        ) {
             onComputePUs(null);
             return;
         }
 
-
         // Get height and width from geoJSONData
-        const [height, width] = calculateAutoDimensions(geoJSONData, resolution);
+        const [height, width] = calculateAutoDimensions(
+            geoJSONData,
+            resolution,
+        );
         const result = totalPuContribution(
             height,
             width,
             inputBands,
             dataType,
-            inputSamples
+            inputSamples,
         );
         onComputePUs(result);
     };
 
     const handleReset = () => {
-        setMosaicking('SIMPLE');
-        setResolutionClass('S210');
+        setMosaicking("SIMPLE");
+        setResolutionClass("S210");
         setInputSamples(1);
         setResolution(10);
         setInputBands(3);
-        setDataType('8bit');
+        setDataType("8bit");
         onComputePUs(null);
         onReset(true);
     };
@@ -76,10 +87,15 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                 <h2 className="text-xl font-bold mb-4">Request Parameters</h2>
                 <div className="mb-4">
                     <label className="block mb-2">
-                        <a href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#mosaicking"
+                        <a
+                            href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#mosaicking"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-shgreen">Mosaicking</a> method:
+                            className="text-shgreen"
+                        >
+                            Mosaicking
+                        </a>{" "}
+                        method:
                         <select
                             value={mosaicking}
                             onChange={handleMosaickingChange}
@@ -91,13 +107,19 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                         </select>
                     </label>
                 </div>
-                {mosaicking === 'ORBIT' || mosaicking === 'TILE' ? (
+                {mosaicking === "ORBIT" || mosaicking === "TILE" ? (
                     <div className="mb-4">
                         <label className="block mb-2">
-                            Number of <a href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#samples"
+                            Number of{" "}
+                            <a
+                                href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#samples"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-shgreen">input samples</a> (images):
+                                className="text-shgreen"
+                            >
+                                input samples
+                            </a>{" "}
+                            (images):
                             <input
                                 type="number"
                                 value={inputSamples}
@@ -115,15 +137,19 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                             onChange={handleResolutionClassChange}
                             className="block mt-1 p-1 border rounded"
                         >
-                            <option value="S210">Sentinel-2: 10m</option>
-                            <option value="L8">Landsat: 30m</option>
-                            <option value="PS">PlanetScope: 3m</option>
-                            <option value="SkySat">SkySat: 0.5m</option>
-                            <option value="OTHER">Other</option>
+                            {Object.keys(resolutionMapping).map((optionKey) => {
+                                const option =
+                                    resolutionMapping[optionKey].text;
+                                return (
+                                    <option value={optionKey} key={option}>
+                                        {option}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </label>
                 </div>
-                {resolutionClass === 'OTHER' ? (
+                {resolutionClass === "OTHER" ? (
                     <div className="mb-4">
                         <label className="block mb-2">
                             Custom Resolution (m):
@@ -138,10 +164,16 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                 ) : null}
                 <div className="mb-4">
                     <label className="block mb-2">
-                        Number of <a href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#input-object-properties"
+                        Number of{" "}
+                        <a
+                            href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#input-object-properties"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-shgreen">Input Bands</a> in the Evalscript:
+                            className="text-shgreen"
+                        >
+                            Input Bands
+                        </a>{" "}
+                        in the Evalscript:
                         <input
                             type="number"
                             value={inputBands}
@@ -152,10 +184,15 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                 </div>
                 <div className="mb-4">
                     <label className="block mb-2">
-                        <a href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#sampletype"
+                        <a
+                            href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#sampletype"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-shgreen">SampleType</a> returned by the Evalscript:
+                            className="text-shgreen"
+                        >
+                            SampleType
+                        </a>{" "}
+                        returned by the Evalscript:
                         <select
                             value={dataType}
                             onChange={handleDataTypeChange}
@@ -168,8 +205,11 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                     </label>
                 </div>
                 <div className="flex justify-center w-full gap-4">
-                    <button className="secondary-button ml-aut">
-                        <button onClick={handleComputePUs}>Compute PUs</button>
+                    <button
+                        className="secondary-button ml-aut"
+                        onClick={handleComputePUs}
+                    >
+                        Compute PUs
                     </button>
                     <button
                         className="bg-gray-300 hover:bg-gray-400 secondary-button"
