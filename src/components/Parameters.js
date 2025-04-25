@@ -204,12 +204,14 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                 </div>
                 <div className="flex justify-center w-full gap-4">
                     <button
+                        type="button"
                         className="secondary-button ml-aut"
                         onClick={handleComputePUs}
                     >
                         Compute PUs
                     </button>
                     <button
+                        type="button"
                         className="bg-gray-300 hover:bg-gray-400 secondary-button"
                         onClick={handleReset}
                     >

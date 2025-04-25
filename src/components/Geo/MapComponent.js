@@ -85,11 +85,11 @@ const MapComponent = ({
             updateTotalArea(allFeatures);
             updateGeoJSON(allFeatures);
         },
-        [setPolygons, updateTotalArea, updateGeoJSON],
+        [updateTotalArea, updateGeoJSON],
     );
 
     useEffect(() => {
-        if (geoJSONData && geoJSONData.features) {
+        if (geoJSONData?.features) {
             const currentFeatureGroup = featureGroupRef.current;
             currentFeatureGroup.clearLayers();
 
@@ -111,7 +111,7 @@ const MapComponent = ({
         } else {
             console.warn("Missing or wrong shape of GeoJSON.");
         }
-    }, [geoJSONData, setPolygons, updateTotalArea, updateGeoJSON]);
+    }, [geoJSONData, updateTotalArea, updateGeoJSON]);
 
     useEffect(() => {
         clearGeoJSONRef.current = clearAllPolygons;
