@@ -1,10 +1,10 @@
 import React, { useState, useRef, useCallback } from "react";
-import HeaderLogo from "./components/Header.js";
-import GeoJSONAreaCalculator from "./components/Geo/GeoJSONAreaCalculator.js";
-import MapComponent from "./components/Geo/MapComponent.js";
-import AreaBox from "./components/Geo/AreaBox.js";
-import Parameters from "./components/Parameters.js";
-import PUBox from "./components/Results.js";
+import HeaderLogo from "./components/Header.jsx";
+import GeoJSONAreaCalculator from "./components/Geo/GeoJSONAreaCalculator.jsx";
+import MapComponent from "./components/Geo/MapComponent.jsx";
+import AreaBox from "./components/Geo/AreaBox.jsx";
+import Parameters from "./components/Parameters.jsx";
+import PUBox from "./components/Results.jsx";
 
 const App = () => {
     const [geoJSONData, setGeoJSONData] = useState(null);
@@ -56,7 +56,7 @@ const App = () => {
                 </div>
             </div>
 
-            <div className="flex mx-4 lg:mx-4 h-[80vh]">
+            <div className="flex px-4 lg:px-4 h-[80vh]">
                 <div className="w-1/2 p-1">
                     <GeoJSONAreaCalculator
                         onGeoJSONUpload={handleGeoJSONUpload}

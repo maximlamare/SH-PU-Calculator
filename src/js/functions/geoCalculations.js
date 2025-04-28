@@ -20,18 +20,18 @@ const calculatePixelSize = (geometry, resolution) => {
     ];
 };
 
-const calculateAutoDimensions = (geoJSONData, resolution) => {
+export const calculateAutoDimensions = (geoJSONData, resolution) => {
     const bounds = getBounds(geoJSONData);
     const pixelSize = calculatePixelSize(bounds, resolution);
     return pixelSize;
 };
 
-const computeArea = (geoJSONData) => {
+export const computeArea = (geoJSONData) => {
     return turf.area(geoJSONData);
 };
 
 // Haversine formula
-function measure(lat1, lon1, lat2, lon2) {
+export function measure(lat1, lon1, lat2, lon2) {
     // generally used geo measurement function
     const R = 6378.137; // Radius of earth in KM
     const dLat = (lat2 * Math.PI) / 180 - (lat1 * Math.PI) / 180;
@@ -47,10 +47,10 @@ function measure(lat1, lon1, lat2, lon2) {
     return d * 1000; // meters
 }
 
-export {
-    calculateHeightWidth,
-    calculatePixelSize,
-    computeArea,
-    getBounds,
-    calculateAutoDimensions,
-};
+// export {
+//     calculateHeightWidth,
+//     calculatePixelSize,
+//     computeArea,
+//     getBounds,
+//     calculateAutoDimensions,
+// };

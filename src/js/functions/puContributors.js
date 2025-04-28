@@ -1,4 +1,4 @@
-function areaPUs(height, width) {
+export function areaPUs(height, width) {
     /**
      * Computes the contribution based on a given area (in m2) and a resolution.
      *
@@ -11,7 +11,7 @@ function areaPUs(height, width) {
         : Math.max(((height * width) / 512 ** 2).toFixed(2), 0.01);
 }
 
-function inputBandPUs(numInputBands) {
+export function inputBandPUs(numInputBands) {
     /**
      * Computes the contribution based on input bands.
      *
@@ -21,7 +21,7 @@ function inputBandPUs(numInputBands) {
     return numInputBands / 3;
 }
 
-function dataTypeContributor(dataType) {
+export function dataTypeContributor(dataType) {
     /**
      * Computes the contribution based on data type.
      *
@@ -38,7 +38,7 @@ function dataTypeContributor(dataType) {
     throw new Error(`Invalid data type. Expected "32bit", "16bit", or "8bit".`);
 }
 
-function samplesContributor(dataSamples) {
+export function samplesContributor(dataSamples) {
     /**
      * Computes the contribution based on data samples.
      *
@@ -48,7 +48,13 @@ function samplesContributor(dataSamples) {
     return dataSamples;
 }
 
-function totalPuContribution(height, width, numInputBands, dtype, dataSamples) {
+export function totalPuContribution(
+    height,
+    width,
+    numInputBands,
+    dtype,
+    dataSamples,
+) {
     /**
      * Calculates the total Processing Unit (PU) contribution based on various factors.
      *
@@ -81,10 +87,10 @@ function totalPuContribution(height, width, numInputBands, dtype, dataSamples) {
     return Math.max(totalContrib, 0.005);
 }
 
-module.exports = {
-    areaPUs,
-    inputBandPUs,
-    dataTypeContributor,
-    samplesContributor,
-    totalPuContribution,
-};
+// module.exports = {
+//     areaPUs,
+//     inputBandPUs,
+//     dataTypeContributor,
+//     samplesContributor,
+//     totalPuContribution,
+// };

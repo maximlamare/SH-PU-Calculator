@@ -4,7 +4,7 @@ const HeaderLogo = () => {
     return (
         <>
             <img
-                src={`${process.env.PUBLIC_URL}/sentinel_hub_logo_big.png`}
+                src={`/copernicus.png`}
                 className="sm:w-48 w-24 h-auto"
                 alt="logo"
             />
