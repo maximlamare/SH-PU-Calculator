@@ -41,7 +41,8 @@
         "preview": "vite preview",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build",
-        "format": "npx @biomejs/biome check --write ./src"
+        "format": "npx @biomejs/biome check --write ./src",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
     },
     "browserslist": {
         "production": [
@@ -54,5 +55,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "jest": {
+        "transform": {}
     }
 }
