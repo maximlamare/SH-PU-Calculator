@@ -81,18 +81,19 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
 			<div className="flex flex-col items-start w-full">
 				<h2 className="text-lg font-bold mb-4">Request Parameters</h2>
 				<div className="mb-4">
-					<label className="">
+					<label for="mosaick">
 						<a
 							href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#mosaicking"
 							target="_blank"
 							rel="noopener noreferrer"
-							className=""
+							for="mosaick"
 						>
 							Mosaicking
 						</a>{" "}
 						method:
 					</label>
 					<select
+						name="mosaick"
 						value={mosaicking}
 						onChange={handleMosaickingChange}
 						className="block mt-1 py-2 px-2 border bg-white text-sm text-black"
@@ -104,7 +105,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
 				</div>
 				{mosaicking === "ORBIT" || mosaicking === "TILE" ? (
 					<div className="mb-4">
-						<label className="">
+						<label for="number">
 							Number of{" "}
 							<a
 								href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#samples"
@@ -117,6 +118,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
 							(images):
 						</label>
 						<input
+							name="number"
 							type="number"
 							value={inputSamples}
 							onChange={handleInputSamplesChange}
@@ -125,8 +127,9 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
 					</div>
 				) : null}
 				<div className="mb-4">
-					<label className="">Resolution (m):</label>
+					<label for="resolution">Resolution (m):</label>
 					<select
+						name="resolution"
 						value={resolutionClass}
 						onChange={handleResolutionClassChange}
 						className="block mt-1 p-2 border text-sm text-black bg-white"
@@ -143,8 +146,9 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
 				</div>
 				{resolutionClass === "OTHER" ? (
 					<div className="mb-4">
-						<label className="">Custom Resolution (m):</label>
+						<label for="custom">Custom Resolution (m):</label>
 						<input
+							name="custom"
 							type="number"
 							value={resolution}
 							onChange={handleResolutionChange}
@@ -153,7 +157,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
 					</div>
 				) : null}
 				<div className="mb-4">
-					<label className="">
+					<label for="bands">
 						Number of{" "}
 						<a
 							href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#input-object-properties"
@@ -166,6 +170,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
 						in the Evalscript:
 					</label>
 					<input
+						name="bands"
 						type="number"
 						value={inputBands}
 						onChange={handleInputBandsChange}
@@ -173,7 +178,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
 					/>
 				</div>
 				<div className="mb-4">
-					<label className="">
+					<label for="bit">
 						<a
 							href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#sampletype"
 							target="_blank"
@@ -185,6 +190,7 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
 						returned by the Evalscript:
 					</label>
 					<select
+						name="bit"
 						value={dataType}
 						onChange={handleDataTypeChange}
 						className="block mt-1 p-2 border bg-white text-sm text-black"
