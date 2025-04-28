@@ -86,11 +86,3 @@ export function totalPuContribution(
 
     return Math.max(totalContrib, 0.005);
 }
-
-// module.exports = {
-//     areaPUs,
-//     inputBandPUs,
-//     dataTypeContributor,
-//     samplesContributor,
-//     totalPuContribution,
-// };

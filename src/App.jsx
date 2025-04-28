@@ -51,13 +51,11 @@ const App = () => {
         <div className="App">
             <div id="code-editor-modal" />
             <div className="flex items-center justify-between lg:flex-row flex-co p-4 lg:x-4 bg-blue-500">
-                <div className="flex items-center px-4">
-                    <HeaderLogo />
-                </div>
+                <HeaderLogo />
             </div>
 
-            <div className="flex gap-4 p-4 lg:px-4">
-                <div className="flex flex-col gap-4 w-1/2">
+            <div className="grid gap-4 p-4 lg:px-4 grid-cols-2">
+                <div className="flex flex-col gap-4">
                     <GeoJSONAreaCalculator
                         onGeoJSONUpload={handleGeoJSONUpload}
                         onClearGeoJSON={clearGeoJSONData}
@@ -74,14 +72,12 @@ const App = () => {
                         reset={reset}
                     />
                 </div>
-                <div className="w-1/2 h-[80vh]">
-                    <MapComponent
-                        onAreaUpdate={handleAreaUpdate}
-                        geoJSONData={geoJSONData}
-                        clearGeoJSONRef={clearGeoJSONRef}
-                        onGeoJSONUpdate={handleGeoJSONUpdate}
-                    />
-                </div>
+                <MapComponent
+                    onAreaUpdate={handleAreaUpdate}
+                    geoJSONData={geoJSONData}
+                    clearGeoJSONRef={clearGeoJSONRef}
+                    onGeoJSONUpdate={handleGeoJSONUpdate}
+                />
             </div>
         </div>
     );

@@ -46,11 +46,3 @@ export function measure(lat1, lon1, lat2, lon2) {
     const d = R * c;
     return d * 1000; // meters
 }
-
-// export {
-//     calculateHeightWidth,
-//     calculatePixelSize,
-//     computeArea,
-//     getBounds,
-//     calculateAutoDimensions,
-// };
