@@ -28,7 +28,7 @@
     "react-dom": "^18.3.1",
     "react-leaflet": "^4.2.1",
     "react-leaflet-draw": "^0.20.4",
-    "tailwindcss": "^3.0.0",
+    "tailwindcss": "^4.1.4",
     "tippy.js": "^6.3.7",
     "web-vitals": "^2.1.4"
   },
