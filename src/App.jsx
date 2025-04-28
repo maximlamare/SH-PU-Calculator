@@ -50,7 +50,7 @@ const App = () => {
     return (
         <div className="App">
             <div id="code-editor-modal" />
-            <div className="flex items-center justify-between lg:flex-row flex-co mx-4 lg:mx-4">
+            <div className="flex items-center justify-between lg:flex-row flex-co mx-4 lg:mx-4 bg-bbb-500">
                 <div className="flex items-center">
                     <HeaderLogo />
                 </div>

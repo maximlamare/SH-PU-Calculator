@@ -4,6 +4,9 @@
   "homepage": "https://maximlamare.github.io/SH-PU-Calculator",
   "private": true,
   "type": "module",
+  "prettier": {
+    "tabWidth": 4
+  },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@testing-library/jest-dom": "^5.17.0",
@@ -38,12 +41,6 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
