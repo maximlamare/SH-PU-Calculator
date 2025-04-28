@@ -80,34 +80,34 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
     };
 
     return (
-        <div className="flex bg-gray-100 rounded-lg min-h overflow-y-auto items-center p-4 ">
+        <div className="flex bg-gray-500 min-h overflow-y-auto items-center p-4 ">
             <div className="flex flex-col items-start w-full">
-                <h2 className="text-xl font-bold mb-4">Request Parameters</h2>
+                <h2 className="text-lg font-bold mb-4">Request Parameters</h2>
                 <div className="mb-4">
-                    <label className="block mb-2">
+                    <label className="">
                         <a
                             href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#mosaicking"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-shgreen"
+                            className=""
                         >
                             Mosaicking
                         </a>{" "}
                         method:
-                        <select
-                            value={mosaicking}
-                            onChange={handleMosaickingChange}
-                            className="block mt-1 p-1 border rounded"
-                        >
-                            <option value="SIMPLE">SIMPLE</option>
-                            <option value="ORBIT">ORBIT</option>
-                            <option value="TILE">TILE</option>
-                        </select>
                     </label>
+                    <select
+                        value={mosaicking}
+                        onChange={handleMosaickingChange}
+                        className="block mt-1 py-2 px-2 border bg-white text-sm text-black"
+                    >
+                        <option value="SIMPLE">SIMPLE</option>
+                        <option value="ORBIT">ORBIT</option>
+                        <option value="TILE">TILE</option>
+                    </select>
                 </div>
                 {mosaicking === "ORBIT" || mosaicking === "TILE" ? (
                     <div className="mb-4">
-                        <label className="block mb-2">
+                        <label className="">
                             Number of{" "}
                             <a
                                 href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#samples"
@@ -118,50 +118,45 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                                 input samples
                             </a>{" "}
                             (images):
-                            <input
-                                type="number"
-                                value={inputSamples}
-                                onChange={handleInputSamplesChange}
-                                className="block mt-1 p-1 border rounded"
-                            />
                         </label>
+                        <input
+                            type="number"
+                            value={inputSamples}
+                            onChange={handleInputSamplesChange}
+                            className="block mt-1 p-2 border bg-white text-sm text-black"
+                        />
                     </div>
                 ) : null}
                 <div className="mb-4">
-                    <label className="block mb-2">
-                        Resolution (m):
-                        <select
-                            value={resolutionClass}
-                            onChange={handleResolutionClassChange}
-                            className="block mt-1 p-1 border rounded"
-                        >
-                            {Object.keys(resolutionMapping).map((optionKey) => {
-                                const option =
-                                    resolutionMapping[optionKey].text;
-                                return (
-                                    <option value={optionKey} key={option}>
-                                        {option}
-                                    </option>
-                                );
-                            })}
-                        </select>
-                    </label>
+                    <label className="">Resolution (m):</label>
+                    <select
+                        value={resolutionClass}
+                        onChange={handleResolutionClassChange}
+                        className="block mt-1 p-2 border text-sm text-black bg-white"
+                    >
+                        {Object.keys(resolutionMapping).map((optionKey) => {
+                            const option = resolutionMapping[optionKey].text;
+                            return (
+                                <option value={optionKey} key={option}>
+                                    {option}
+                                </option>
+                            );
+                        })}
+                    </select>
                 </div>
                 {resolutionClass === "OTHER" ? (
                     <div className="mb-4">
-                        <label className="block mb-2">
-                            Custom Resolution (m):
-                            <input
-                                type="number"
-                                value={resolution}
-                                onChange={handleResolutionChange}
-                                className="block mt-1 p-1 border rounded"
-                            />
-                        </label>
+                        <label className="">Custom Resolution (m):</label>
+                        <input
+                            type="number"
+                            value={resolution}
+                            onChange={handleResolutionChange}
+                            className="block mt-1 p-2 border bg-white text-sm text-black"
+                        />
                     </div>
                 ) : null}
                 <div className="mb-4">
-                    <label className="block mb-2">
+                    <label className="">
                         Number of{" "}
                         <a
                             href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#input-object-properties"
@@ -172,16 +167,16 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                             Input Bands
                         </a>{" "}
                         in the Evalscript:
-                        <input
-                            type="number"
-                            value={inputBands}
-                            onChange={handleInputBandsChange}
-                            className="block mt-1 p-1 border rounded"
-                        />
                     </label>
+                    <input
+                        type="number"
+                        value={inputBands}
+                        onChange={handleInputBandsChange}
+                        className="block mt-1 p-2 border bg-white text-sm text-black"
+                    />
                 </div>
                 <div className="mb-4">
-                    <label className="block mb-2">
+                    <label className="">
                         <a
                             href="https://docs.sentinel-hub.com/api/latest/evalscript/v3/#sampletype"
                             target="_blank"
@@ -191,28 +186,28 @@ const Parameters = ({ geoJSONData, onComputePUs, onReset }) => {
                             SampleType
                         </a>{" "}
                         returned by the Evalscript:
-                        <select
-                            value={dataType}
-                            onChange={handleDataTypeChange}
-                            className="block mt-1 p-1 border rounded"
-                        >
-                            <option value="8bit">8bit</option>
-                            <option value="16bit">16bit</option>
-                            <option value="32bit">32bit</option>
-                        </select>
                     </label>
+                    <select
+                        value={dataType}
+                        onChange={handleDataTypeChange}
+                        className="block mt-1 p-2 border bg-white text-sm text-black"
+                    >
+                        <option value="8bit">8bit</option>
+                        <option value="16bit">16bit</option>
+                        <option value="32bit">32bit</option>
+                    </select>
                 </div>
                 <div className="flex justify-center w-full gap-4">
                     <button
                         type="button"
-                        className="secondary-button ml-aut"
+                        className="bg-green-500 ml-aut py-2 px-4 text-black font-bold"
                         onClick={handleComputePUs}
                     >
                         Compute PUs
                     </button>
                     <button
                         type="button"
-                        className="bg-gray-300 hover:bg-gray-400 secondary-button"
+                        className="bg-white border-green-500 border py-2 px-4 text-gray-900"
                         onClick={handleReset}
                     >
                         Reset

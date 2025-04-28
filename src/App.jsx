@@ -50,34 +50,31 @@ const App = () => {
     return (
         <div className="App">
             <div id="code-editor-modal" />
-            <div className="flex items-center justify-between lg:flex-row flex-co mx-4 lg:mx-4 bg-bbb-500">
+            <div className="flex items-center justify-between lg:flex-row flex-co p-4 lg:x-4 bg-blue-500">
                 <div className="flex items-center">
                     <HeaderLogo />
                 </div>
             </div>
 
-            <div className="flex px-4 lg:px-4 h-[80vh]">
-                <div className="w-1/2 p-1">
+            <div className="flex gap-4 p-4 lg:px-4">
+                <div className="flex flex-col gap-4 w-1/2">
                     <GeoJSONAreaCalculator
                         onGeoJSONUpload={handleGeoJSONUpload}
                         onClearGeoJSON={clearGeoJSONData}
                     />
-                    <div className="my-3" />
                     <AreaBox area={area} />
-                    <div className="my-3" />
                     <Parameters
                         geoJSONData={newGeoJSONData}
                         onComputePUs={handleComputePUs}
                         onReset={handleReset}
                     />
-                    <div className="my-3" />
                     <PUBox
                         PUs={PUs}
                         computeClicked={computeClicked}
                         reset={reset}
                     />
                 </div>
-                <div className="w-1/2 p-1 h-[80vh]">
+                <div className="w-1/2 h-[80vh]">
                     <MapComponent
                         onAreaUpdate={handleAreaUpdate}
                         geoJSONData={geoJSONData}

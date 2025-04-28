@@ -48,10 +48,10 @@ const GeoJSONAreaCalculator = ({ onGeoJSONUpload, onClearGeoJSON }) => {
     };
 
     return (
-        <div className="bg-gray-100 rounded-lg min-h overflow-y-auto p-4">
-            <h2 className="heading-secondary">
+        <div className="bg-gray-500 min-h overflow-y-auto p-4">
+            <h2 className="heading-secondary mb-4">
                 <div className="flex items-center">
-                    <div className="mr-2">GeoJSON file:</div>
+                    <div className="text-lg font-bold mr-2">GeoJSON file:</div>
                     <Tooltip
                         infoStyles="ml-1"
                         content="Upload a GeoJSON file containing a polygon or multi-polygons of your AOI. Alternatively, you can draw a polygon on the map."
@@ -60,31 +60,25 @@ const GeoJSONAreaCalculator = ({ onGeoJSONUpload, onClearGeoJSON }) => {
                     />
                 </div>
             </h2>
-            <br />
             <div className="flex items-center space-x-4">
                 <input
                     type="file"
                     accept=".geojson"
                     onChange={handleFileChange}
                     ref={fileInputRef}
-                    className="flex-grow max-w-full "
-                    style={{
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                    }}
+                    className="flex-grow max-w-full overflow-hidden whitespace-nowrap text-ellipsis bg-white p-1 border-gray-200 border"
                 />
                 <button
                     type="button"
                     onClick={handleUploadGeoJSON}
-                    className="flex justify-right items-center secondary-button ml-auto"
+                    className="flex justify-right items-center bg-green-500 ml-auto py-2 px-4 text-black font-bold"
                 >
                     Upload file
                 </button>
                 <button
                     type="button"
                     onClick={handleClear}
-                    className="bg-gray-300 hover:bg-gray-400 secondary-button"
+                    className="bg-white border-green-500 border py-2 px-4 text-gray-900"
                 >
                     Clear AOI
                 </button>

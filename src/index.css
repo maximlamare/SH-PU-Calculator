@@ -21,5 +21,28 @@
 }
 
 @theme {
-    --color-bbb-500: rgb(10, 67, 147);
+    --color-blue-500: rgb(10, 67, 147);
+    --color-gray-200: rgb(34 36 38 /15%);
+    --color-gray-500: rgb(234, 241, 251);
+    --color-gray-900: rgb(1, 40, 47);
+    --color-green-200: rgb(33, 186, 69);
+    --color-green-500: rgb(119, 204, 9);
+}
+
+body {
+    color: rgb(74, 74, 74);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+a {
+    color: black;
+    text-decoration: underline;
 }

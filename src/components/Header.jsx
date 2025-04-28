@@ -8,8 +8,8 @@ const HeaderLogo = () => {
                 className="sm:w-48 w-24 h-auto"
                 alt="logo"
             />
-            <h1 className="heading-primary ml-1">
-                <i className="text-primary cursor-default"> PU Calculator</i>
+            <h1 className="heading-primary ml-8 mt-5 text-3xl">
+                <i className="text-white cursor-default"> PU Calculator</i>
             </h1>
         </>
     );
