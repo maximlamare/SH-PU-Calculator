@@ -33,6 +33,6 @@ jobs:
             - name: Deploy to GitHub Pages
               run: |
                   git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-                  npx gh-pages -d build --user "maximlamare <32132761+maximlamare@users.noreply.github.com>" --message "Deploying to GitHub Pages"
+                  npx gh-pages -d dist --user "maximlamare <32132761+maximlamare@users.noreply.github.com>" --message "Deploying to GitHub Pages"
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Set the GitHub token for authentication
