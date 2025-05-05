@@ -40,7 +40,7 @@
         "build": "vite build",
         "preview": "vite preview",
         "predeploy": "npm run build",
-        "deploy": "gh-pages -d build",
+        "deploy": "gh-pages -d dist",
         "format": "npx @biomejs/biome check --write ./src",
         "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
     },
