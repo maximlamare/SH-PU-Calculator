@@ -3,12 +3,15 @@ name: Deploy to GitHub Pages
 on:
     push:
         branches:
-            - main
+            - main # Trigger on pushes to your main branch
 
 jobs:
     deploy:
         name: Deploy
         runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+            pages: write
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -27,7 +30,7 @@ jobs:
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                  path: ./dist
+                  path: ./dist # Or the directory containing your built site, e.g., ./build
 
             - name: Deploy to GitHub Pages
               id: deployment
